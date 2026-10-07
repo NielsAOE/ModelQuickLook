@@ -2,7 +2,11 @@
 
 **Quick Look for FBX files on macOS.** Select an `.fbx` in Finder, press <kbd>Space</kbd>, and get an interactive 3D preview, the same way macOS already previews USDZ, OBJ and DAE.
 
-![Example previews: a spider, a textured box, a UV test plane and a sphere](docs/preview.png)
+<p align="center">
+  <img src="docs/screenshots/embedded_texture.png" alt="Quick Look preview of a textured box" width="32%">
+  <img src="docs/screenshots/uv_plane.png" alt="Quick Look preview of a UV test plane with a texture next to the model" width="32%">
+  <img src="docs/screenshots/huesitos.png" alt="Quick Look preview of a shaded mesh" width="32%">
+</p>
 
 ## Features
 
@@ -21,12 +25,16 @@
 ### Download
 
 1. Download `ModelQuickLook.zip` from the [latest release](../../releases/latest), unzip it, and move `ModelQuickLook.app` to `/Applications`.
-2. Allow the app, using either option:
+2. Allow the app. The first time you open it, macOS shows this warning (click **Done**, not *Move to Trash*):
+
+   <p align="center"><img src="docs/screenshots/gatekeeper.png" alt="macOS Gatekeeper dialog: Apple could not verify ModelQuickLook.app is free of malware" width="300"></p>
+
+   Then use either option:
    - **Terminal:** clear the quarantine flag, then open the app.
      ```sh
      xattr -dr com.apple.quarantine /Applications/ModelQuickLook.app
      ```
-   - **System Settings:** open the app and click **Done** on the warning (not *Move to Trash*), then go to **System Settings → Privacy & Security**, scroll down to the message about ModelQuickLook, and click **Open Anyway**.
+   - **System Settings:** after dismissing the warning, go to **System Settings → Privacy & Security**, scroll down to the message about ModelQuickLook, and click **Open Anyway**.
 3. Open the app once so macOS registers the extension.
 4. If Space on an `.fbx` still shows the generic icon, enable **FBXPreview** in **System Settings → General → Login Items & Extensions → Quick Look**, then run `qlmanage -r && qlmanage -r cache`.
 
