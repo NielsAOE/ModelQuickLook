@@ -58,7 +58,7 @@ Set `TEST_RUNNER_SNAPSHOT_DIR=/some/dir` when running tests to write a PNG rende
 - **No Finder thumbnails.** A thumbnail extension works for custom file types, but macOS never calls it for `.fbx` (the type is built into macOS), so Finder keeps the generic icon.
 - Opacity textures, UV transforms, secondary UV sets and blend shapes are not mapped.
 - Models over 5 million triangles are refused.
-- Textures are only found next to the model file; missing ones render gray.
+- Textures are only found next to the model file; missing ones render gray. To read them, the extension's sandbox has a read-only exception for `/Users/` and `/Volumes/`, so models stored elsewhere only show embedded textures.
 - A vertex follows at most its four strongest bones.
 
 ## Credits and license

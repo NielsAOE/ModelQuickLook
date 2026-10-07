@@ -79,8 +79,9 @@ final class FBXSceneBuilderTests: XCTestCase {
     func testAnimationFrames() throws {
         let sample = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent("Samples/Samba Dancing.fbx")
-        let outDir = try XCTUnwrap(ProcessInfo.processInfo.environment["SNAPSHOT_DIR"].flatMap { $0.isEmpty ? nil : $0 },
-                                   "SNAPSHOT_DIR not set")
+        guard let outDir = ProcessInfo.processInfo.environment["SNAPSHOT_DIR"], !outDir.isEmpty else {
+            throw XCTSkip("SNAPSHOT_DIR not set")
+        }
         guard FileManager.default.fileExists(atPath: sample.path) else { throw XCTSkip("no sample") }
         let scene = try FBXSceneBuilder.makeScene(url: sample)
         SceneFraming.addCamera(to: scene)
