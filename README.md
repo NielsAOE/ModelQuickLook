@@ -16,15 +16,17 @@
 ## Install
 
 > [!NOTE]
-> The app is **not notarized** because that requires a paid Apple Developer account. macOS Gatekeeper will block a downloaded copy until you clear the quarantine flag (step 2). Building from source avoids this.
+> The app is **not notarized** because that requires a paid Apple Developer account. macOS Gatekeeper will block a downloaded copy with *"Apple could not verify ModelQuickLook.app is free of malware"* until you allow it (step 2). Building from source avoids this.
 
 ### Download
 
 1. Download `ModelQuickLook.zip` from the [latest release](../../releases/latest), unzip it, and move `ModelQuickLook.app` to `/Applications`.
-2. Clear the quarantine flag:
-   ```sh
-   xattr -dr com.apple.quarantine /Applications/ModelQuickLook.app
-   ```
+2. Allow the app, using either option:
+   - **Terminal:** clear the quarantine flag, then open the app.
+     ```sh
+     xattr -dr com.apple.quarantine /Applications/ModelQuickLook.app
+     ```
+   - **System Settings:** open the app and click **Done** on the warning (not *Move to Trash*), then go to **System Settings → Privacy & Security**, scroll down to the message about ModelQuickLook, and click **Open Anyway**.
 3. Open the app once so macOS registers the extension.
 4. If Space on an `.fbx` still shows the generic icon, enable **FBXPreview** in **System Settings → General → Login Items & Extensions → Quick Look**, then run `qlmanage -r && qlmanage -r cache`.
 
