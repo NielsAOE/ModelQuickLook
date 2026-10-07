@@ -1,0 +1,56 @@
+name: ModelQuickLook
+options:
+  bundleIdPrefix: com.nielsostman
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    ENABLE_HARDENED_RUNTIME: NO
+targets:
+  ModelQuickLook:
+    type: application
+    platform: macOS
+    sources: [App]
+    dependencies:
+      - target: FBXPreview
+        embed: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nielsostman.ModelQuickLook
+        INFOPLIST_FILE: App/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO
+  FBXPreview:
+    type: app-extension
+    platform: macOS
+    sources: [PreviewExtension, Shared]
+    settings:
+      base:
+        SWIFT_OBJC_BRIDGING_HEADER: Shared/Bridging-Header.h
+        GCC_OPTIMIZATION_LEVEL: "2"
+        PRODUCT_BUNDLE_IDENTIFIER: com.nielsostman.ModelQuickLook.FBXPreview
+        INFOPLIST_FILE: PreviewExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: PreviewExtension/FBXPreview.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+  Tests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - Tests
+      - Shared
+    settings:
+      base:
+        SWIFT_OBJC_BRIDGING_HEADER: Shared/Bridging-Header.h
+        GCC_OPTIMIZATION_LEVEL: "2"
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.nielsostman.ModelQuickLook.Tests
+schemes:
+  ModelQuickLook:
+    build:
+      targets:
+        ModelQuickLook: all
+    test:
+      targets: [Tests]
